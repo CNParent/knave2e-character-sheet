@@ -10,6 +10,10 @@
     import Notes from "./components/Notes.svelte";
 	import Status from "./components/Status.svelte";
 
+	function update() {
+		model = model;
+	}
+
 	let model = character();
 
 </script>
@@ -26,7 +30,7 @@
 	<Navbar bind:model={model}></Navbar>
 	<div class="row m-2">
 		<Details open={true} title="Character"><Bio model={model} /></Details>
-		<Details open={true} title="Status"><Status model={model} /></Details>
+		<Details open={true} title="Status"><Status model={model} {update}/></Details>
 		<Details open={false} title="Inventory"><Equipment model={model} /></Details>
 		<Details open={false} title="Notes"><Notes notes={model.notes} /></Details>
 	</div>

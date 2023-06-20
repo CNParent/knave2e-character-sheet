@@ -3930,8 +3930,8 @@
     	let current;
     	let mounted;
     	let dispose;
-    	const default_slot_template = /*#slots*/ ctx[4].default;
-    	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[3], null);
+    	const default_slot_template = /*#slots*/ ctx[5].default;
+    	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[4], null);
 
     	return {
     		c() {
@@ -3970,15 +3970,15 @@
     			if (!current || dirty & /*scoreText*/ 1) set_data(t0, /*scoreText*/ ctx[0]);
 
     			if (default_slot) {
-    				if (default_slot.p && (!current || dirty & /*$$scope*/ 8)) {
+    				if (default_slot.p && (!current || dirty & /*$$scope*/ 16)) {
     					update_slot_base(
     						default_slot,
     						default_slot_template,
     						ctx,
-    						/*$$scope*/ ctx[3],
+    						/*$$scope*/ ctx[4],
     						!current
-    						? get_all_dirty_from_scope(/*$$scope*/ ctx[3])
-    						: get_slot_changes(default_slot_template, /*$$scope*/ ctx[3], dirty, null),
+    						? get_all_dirty_from_scope(/*$$scope*/ ctx[4])
+    						: get_slot_changes(default_slot_template, /*$$scope*/ ctx[4], dirty, null),
     						null
     					);
     				}
@@ -4006,16 +4006,20 @@
     	let scoreText;
     	let { $$slots: slots = {}, $$scope } = $$props;
     	let { score } = $$props;
+    	let { update } = $$props;
 
     	function handleClick(e) {
     		$$invalidate(2, score += e.shiftKey ? -1 : 1);
     		if (score < 0) $$invalidate(2, score = 10);
     		if (score > 10) $$invalidate(2, score = 0);
+    		if (!update) return;
+    		update();
     	}
 
     	$$self.$$set = $$props => {
     		if ('score' in $$props) $$invalidate(2, score = $$props.score);
-    		if ('$$scope' in $$props) $$invalidate(3, $$scope = $$props.$$scope);
+    		if ('update' in $$props) $$invalidate(3, update = $$props.update);
+    		if ('$$scope' in $$props) $$invalidate(4, $$scope = $$props.$$scope);
     	};
 
     	$$self.$$.update = () => {
@@ -4024,13 +4028,13 @@
     		}
     	};
 
-    	return [scoreText, handleClick, score, $$scope, slots];
+    	return [scoreText, handleClick, score, update, $$scope, slots];
     }
 
     class Ability extends SvelteComponent {
     	constructor(options) {
     		super();
-    		init(this, options, instance$4, create_fragment$4, safe_not_equal, { score: 2 });
+    		init(this, options, instance$4, create_fragment$4, safe_not_equal, { score: 2, update: 3 });
     	}
     }
 
@@ -4052,7 +4056,7 @@
     	};
     }
 
-    // (8:0) <Ability bind:score={model.abilities.dexterity}>
+    // (9:0) <Ability bind:score={model.abilities.dexterity}>
     function create_default_slot_4(ctx) {
     	let t;
 
@@ -4069,7 +4073,7 @@
     	};
     }
 
-    // (9:0) <Ability bind:score={model.abilities.constitution}>
+    // (10:0) <Ability bind:score={model.abilities.constitution} {update}>
     function create_default_slot_3$1(ctx) {
     	let t;
 
@@ -4086,7 +4090,7 @@
     	};
     }
 
-    // (10:0) <Ability bind:score={model.abilities.intelligence}>
+    // (11:0) <Ability bind:score={model.abilities.intelligence}>
     function create_default_slot_2$1(ctx) {
     	let t;
 
@@ -4103,7 +4107,7 @@
     	};
     }
 
-    // (11:0) <Ability bind:score={model.abilities.wisdom}>
+    // (12:0) <Ability bind:score={model.abilities.wisdom}>
     function create_default_slot_1$1(ctx) {
     	let t;
 
@@ -4120,7 +4124,7 @@
     	};
     }
 
-    // (12:0) <Ability bind:score={model.abilities.charisma}>
+    // (13:0) <Ability bind:score={model.abilities.charisma}>
     function create_default_slot$1(ctx) {
     	let t;
 
@@ -4158,7 +4162,7 @@
     	let current;
 
     	function ability0_score_binding(value) {
-    		/*ability0_score_binding*/ ctx[1](value);
+    		/*ability0_score_binding*/ ctx[2](value);
     	}
 
     	let ability0_props = {
@@ -4174,7 +4178,7 @@
     	binding_callbacks.push(() => bind(ability0, 'score', ability0_score_binding));
 
     	function ability1_score_binding(value) {
-    		/*ability1_score_binding*/ ctx[2](value);
+    		/*ability1_score_binding*/ ctx[3](value);
     	}
 
     	let ability1_props = {
@@ -4190,10 +4194,11 @@
     	binding_callbacks.push(() => bind(ability1, 'score', ability1_score_binding));
 
     	function ability2_score_binding(value) {
-    		/*ability2_score_binding*/ ctx[3](value);
+    		/*ability2_score_binding*/ ctx[4](value);
     	}
 
     	let ability2_props = {
+    		update: /*update*/ ctx[1],
     		$$slots: { default: [create_default_slot_3$1] },
     		$$scope: { ctx }
     	};
@@ -4206,7 +4211,7 @@
     	binding_callbacks.push(() => bind(ability2, 'score', ability2_score_binding));
 
     	function ability3_score_binding(value) {
-    		/*ability3_score_binding*/ ctx[4](value);
+    		/*ability3_score_binding*/ ctx[5](value);
     	}
 
     	let ability3_props = {
@@ -4222,7 +4227,7 @@
     	binding_callbacks.push(() => bind(ability3, 'score', ability3_score_binding));
 
     	function ability4_score_binding(value) {
-    		/*ability4_score_binding*/ ctx[5](value);
+    		/*ability4_score_binding*/ ctx[6](value);
     	}
 
     	let ability4_props = {
@@ -4238,7 +4243,7 @@
     	binding_callbacks.push(() => bind(ability4, 'score', ability4_score_binding));
 
     	function ability5_score_binding(value) {
-    		/*ability5_score_binding*/ ctx[6](value);
+    		/*ability5_score_binding*/ ctx[7](value);
     	}
 
     	let ability5_props = {
@@ -4284,7 +4289,7 @@
     		p(ctx, [dirty]) {
     			const ability0_changes = {};
 
-    			if (dirty & /*$$scope*/ 128) {
+    			if (dirty & /*$$scope*/ 256) {
     				ability0_changes.$$scope = { dirty, ctx };
     			}
 
@@ -4297,7 +4302,7 @@
     			ability0.$set(ability0_changes);
     			const ability1_changes = {};
 
-    			if (dirty & /*$$scope*/ 128) {
+    			if (dirty & /*$$scope*/ 256) {
     				ability1_changes.$$scope = { dirty, ctx };
     			}
 
@@ -4309,8 +4314,9 @@
 
     			ability1.$set(ability1_changes);
     			const ability2_changes = {};
+    			if (dirty & /*update*/ 2) ability2_changes.update = /*update*/ ctx[1];
 
-    			if (dirty & /*$$scope*/ 128) {
+    			if (dirty & /*$$scope*/ 256) {
     				ability2_changes.$$scope = { dirty, ctx };
     			}
 
@@ -4323,7 +4329,7 @@
     			ability2.$set(ability2_changes);
     			const ability3_changes = {};
 
-    			if (dirty & /*$$scope*/ 128) {
+    			if (dirty & /*$$scope*/ 256) {
     				ability3_changes.$$scope = { dirty, ctx };
     			}
 
@@ -4336,7 +4342,7 @@
     			ability3.$set(ability3_changes);
     			const ability4_changes = {};
 
-    			if (dirty & /*$$scope*/ 128) {
+    			if (dirty & /*$$scope*/ 256) {
     				ability4_changes.$$scope = { dirty, ctx };
     			}
 
@@ -4349,7 +4355,7 @@
     			ability4.$set(ability4_changes);
     			const ability5_changes = {};
 
-    			if (dirty & /*$$scope*/ 128) {
+    			if (dirty & /*$$scope*/ 256) {
     				ability5_changes.$$scope = { dirty, ctx };
     			}
 
@@ -4398,6 +4404,7 @@
 
     function instance$3($$self, $$props, $$invalidate) {
     	let { model } = $$props;
+    	let { update } = $$props;
 
     	function ability0_score_binding(value) {
     		if ($$self.$$.not_equal(model.abilities.strength, value)) {
@@ -4443,10 +4450,12 @@
 
     	$$self.$$set = $$props => {
     		if ('model' in $$props) $$invalidate(0, model = $$props.model);
+    		if ('update' in $$props) $$invalidate(1, update = $$props.update);
     	};
 
     	return [
     		model,
+    		update,
     		ability0_score_binding,
     		ability1_score_binding,
     		ability2_score_binding,
@@ -4459,7 +4468,7 @@
     class Abilities extends SvelteComponent {
     	constructor(options) {
     		super();
-    		init(this, options, instance$3, create_fragment$3, safe_not_equal, { model: 0 });
+    		init(this, options, instance$3, create_fragment$3, safe_not_equal, { model: 0, update: 1 });
     	}
     }
 
@@ -4634,7 +4643,13 @@
     	let abilities;
     	let current;
     	hitpoints = new HitPoints({ props: { hp: /*model*/ ctx[0].hp } });
-    	abilities = new Abilities({ props: { model: /*model*/ ctx[0] } });
+
+    	abilities = new Abilities({
+    			props: {
+    				model: /*model*/ ctx[0],
+    				update: /*update*/ ctx[1]
+    			}
+    		});
 
     	return {
     		c() {
@@ -4658,6 +4673,7 @@
     			hitpoints.$set(hitpoints_changes);
     			const abilities_changes = {};
     			if (dirty & /*model*/ 1) abilities_changes.model = /*model*/ ctx[0];
+    			if (dirty & /*update*/ 2) abilities_changes.update = /*update*/ ctx[1];
     			abilities.$set(abilities_changes);
     		},
     		i(local) {
@@ -4683,18 +4699,20 @@
 
     function instance$1($$self, $$props, $$invalidate) {
     	let { model } = $$props;
+    	let { update } = $$props;
 
     	$$self.$$set = $$props => {
     		if ('model' in $$props) $$invalidate(0, model = $$props.model);
+    		if ('update' in $$props) $$invalidate(1, update = $$props.update);
     	};
 
-    	return [model];
+    	return [model, update];
     }
 
     class Status extends SvelteComponent {
     	constructor(options) {
     		super();
-    		init(this, options, instance$1, create_fragment$1, safe_not_equal, { model: 0 });
+    		init(this, options, instance$1, create_fragment$1, safe_not_equal, { model: 0, update: 1 });
     	}
     }
 
@@ -4720,7 +4738,7 @@
     	};
     }
 
-    // (18:1) {#if theme == 'dark'}
+    // (22:1) {#if theme == 'dark'}
     function create_if_block(ctx) {
     	let link;
 
@@ -4739,7 +4757,7 @@
     	};
     }
 
-    // (28:2) <Details open={true} title="Character">
+    // (32:2) <Details open={true} title="Character">
     function create_default_slot_3(ctx) {
     	let bio;
     	let current;
@@ -4773,11 +4791,17 @@
     	};
     }
 
-    // (29:2) <Details open={true} title="Status">
+    // (33:2) <Details open={true} title="Status">
     function create_default_slot_2(ctx) {
     	let status;
     	let current;
-    	status = new Status({ props: { model: /*model*/ ctx[0] } });
+
+    	status = new Status({
+    			props: {
+    				model: /*model*/ ctx[0],
+    				update: /*update*/ ctx[1]
+    			}
+    		});
 
     	return {
     		c() {
@@ -4807,7 +4831,7 @@
     	};
     }
 
-    // (30:2) <Details open={false} title="Inventory">
+    // (34:2) <Details open={false} title="Inventory">
     function create_default_slot_1(ctx) {
     	let equipment;
     	let current;
@@ -4841,7 +4865,7 @@
     	};
     }
 
-    // (31:2) <Details open={false} title="Notes">
+    // (35:2) <Details open={false} title="Notes">
     function create_default_slot(ctx) {
     	let notes;
     	let current;
@@ -4901,7 +4925,7 @@
     	let if_block = current_block_type(ctx);
 
     	function navbar_model_binding(value) {
-    		/*navbar_model_binding*/ ctx[1](value);
+    		/*navbar_model_binding*/ ctx[2](value);
     	}
 
     	let navbar_props = {};
@@ -4997,28 +5021,28 @@
     			navbar.$set(navbar_changes);
     			const details0_changes = {};
 
-    			if (dirty & /*$$scope, model*/ 5) {
+    			if (dirty & /*$$scope, model*/ 9) {
     				details0_changes.$$scope = { dirty, ctx };
     			}
 
     			details0.$set(details0_changes);
     			const details1_changes = {};
 
-    			if (dirty & /*$$scope, model*/ 5) {
+    			if (dirty & /*$$scope, model*/ 9) {
     				details1_changes.$$scope = { dirty, ctx };
     			}
 
     			details1.$set(details1_changes);
     			const details2_changes = {};
 
-    			if (dirty & /*$$scope, model*/ 5) {
+    			if (dirty & /*$$scope, model*/ 9) {
     				details2_changes.$$scope = { dirty, ctx };
     			}
 
     			details2.$set(details2_changes);
     			const details3_changes = {};
 
-    			if (dirty & /*$$scope, model*/ 5) {
+    			if (dirty & /*$$scope, model*/ 9) {
     				details3_changes.$$scope = { dirty, ctx };
     			}
 
@@ -5056,6 +5080,10 @@
     }
 
     function instance($$self, $$props, $$invalidate) {
+    	function update() {
+    		$$invalidate(0, model);
+    	}
+
     	let model = character();
 
     	function navbar_model_binding(value) {
@@ -5063,7 +5091,7 @@
     		$$invalidate(0, model);
     	}
 
-    	return [model, navbar_model_binding];
+    	return [model, update, navbar_model_binding];
     }
 
     class App extends SvelteComponent {

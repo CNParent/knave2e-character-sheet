@@ -1,10 +1,14 @@
 <script>
     export let score;
+    export let update;
 
     function handleClick(e) {
         score += e.shiftKey ? -1 : 1;
         if (score < 0) score = 10;
         if (score > 10) score = 0;
+
+        if (!update) return;
+        update();
     }
 
     $:scoreText = score > 0 ? `+${score}` : `${score}`;
