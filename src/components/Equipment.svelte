@@ -19,11 +19,15 @@
         listActions.remove(model.equipment, item);
         model.equipment = model.equipment;
     }
+
+    $:capacity = 10 + model.abilities.constitution;
+    $:used = model.equipment.reduce((a,b) => a + b.size, 0);
+    $:btnStyle = used > capacity ? 'btn-danger' : 'btn-dark';
 </script>
 
-<div class="d-flex align-items-end">
-    <span>Equipment</span>
-    <button on:click={addEquipment} class="ml-auto btn btn-dark">Add</button>
+<div class="d-flex align-items-end m-1">
+    <button on:click={addEquipment} class="btn btn-dark">Add</button>
+    <span class="ml-auto btn {btnStyle}">{used}/{capacity}</span>
 </div>
 {#each model.equipment as item}
     <ListItem item={item} move={moveEquipment} remove={removeEquipment}>

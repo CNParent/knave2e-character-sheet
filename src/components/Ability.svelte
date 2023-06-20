@@ -3,8 +3,8 @@
 
     function handleClick(e) {
         score += e.shiftKey ? -1 : 1;
-        if (score < 0) score = 0;
-        if (score > 10) score = 10;
+        if (score < 0) score = 10;
+        if (score > 10) score = 0;
     }
 
     $:scoreText = score > 0 ? `+${score}` : `${score}`;

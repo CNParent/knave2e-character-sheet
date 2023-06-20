@@ -16,8 +16,8 @@
     <h3><button class="btn-dark badge" on:click={handleMax}>{hp.max}</button></h3>
     <span class="ml-2 align-self-center">Hit Points</span>
     <div class="btn-group ml-auto">
-        <button on:click={() => handleCurrent({shiftKey: true})} class="btn btn-dark align-self-center">+</button>
-        <button on:click={() => handleCurrent({shiftKey: false})} class="btn btn-dark align-self-center">-</button>
+        <button on:click={() => handleCurrent({shiftKey: false})} class="btn btn-dark align-self-center">+</button>
+        <button on:click={() => handleCurrent({shiftKey: true})} class="btn btn-dark align-self-center">-</button>
     </div>
     <div class="btn-group ml-1">
         <button on:click={() => handleMax({shiftKey: false})} class="btn btn-dark align-self-center">+max</button>

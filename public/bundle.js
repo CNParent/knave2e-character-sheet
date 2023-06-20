@@ -1789,7 +1789,7 @@
     			t1 = space();
     			if (if_block) if_block.c();
     			attr(button, "class", "btn btn-light border w-100 text-left align-top");
-    			attr(div, "class", "col-lg-6 col-12 p-1");
+    			attr(div, "class", "col-12 p-1");
     		},
     		m(target, anchor) {
     			insert(target, div, anchor);
@@ -1902,8 +1902,8 @@
 
     			if (!mounted) {
     				dispose = [
-    					listen(button0, "click", /*click_handler_1*/ ctx[6]),
-    					listen(button1, "click", /*click_handler_2*/ ctx[7])
+    					listen(button0, "click", /*click_handler_1*/ ctx[5]),
+    					listen(button1, "click", /*click_handler_2*/ ctx[6])
     				];
 
     				mounted = true;
@@ -1923,7 +1923,7 @@
     	};
     }
 
-    // (7:0) {#if isEditing}
+    // (6:0) {#if isEditing}
     function create_if_block$3(ctx) {
     	let input0;
     	let t0;
@@ -1961,9 +1961,9 @@
 
     			if (!mounted) {
     				dispose = [
-    					listen(input0, "input", /*input0_input_handler*/ ctx[3]),
-    					listen(input1, "input", /*input1_input_handler*/ ctx[4]),
-    					listen(button, "click", /*click_handler*/ ctx[5])
+    					listen(input0, "input", /*input0_input_handler*/ ctx[2]),
+    					listen(input1, "input", /*input1_input_handler*/ ctx[3]),
+    					listen(button, "click", /*click_handler*/ ctx[4])
     				];
 
     				mounted = true;
@@ -2035,7 +2035,6 @@
     function instance$a($$self, $$props, $$invalidate) {
     	let { item } = $$props;
     	let { isEditing } = $$props;
-    	let { update } = $$props;
 
     	function input0_input_handler() {
     		item.name = this.value;
@@ -2049,7 +2048,6 @@
 
     	const click_handler = () => {
     		$$invalidate(1, isEditing = false);
-    		update();
     	};
 
     	const click_handler_1 = () => $$invalidate(1, isEditing = true);
@@ -2058,13 +2056,11 @@
     	$$self.$$set = $$props => {
     		if ('item' in $$props) $$invalidate(0, item = $$props.item);
     		if ('isEditing' in $$props) $$invalidate(1, isEditing = $$props.isEditing);
-    		if ('update' in $$props) $$invalidate(2, update = $$props.update);
     	};
 
     	return [
     		item,
     		isEditing,
-    		update,
     		input0_input_handler,
     		input1_input_handler,
     		click_handler,
@@ -2076,7 +2072,7 @@
     class Item extends SvelteComponent {
     	constructor(options) {
     		super();
-    		init(this, options, instance$a, create_fragment$a, safe_not_equal, { item: 0, isEditing: 1, update: 2 });
+    		init(this, options, instance$a, create_fragment$a, safe_not_equal, { item: 0, isEditing: 1 });
     	}
     }
 
@@ -2243,13 +2239,13 @@
 
     function get_each_context$2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[6] = list[i];
-    	child_ctx[7] = list;
-    	child_ctx[8] = i;
+    	child_ctx[8] = list[i];
+    	child_ctx[9] = list;
+    	child_ctx[10] = i;
     	return child_ctx;
     }
 
-    // (32:4) <ListItem item={item} move={moveEquipment} remove={removeEquipment}>
+    // (33:4) <ListItem item={item} move={moveEquipment} remove={removeEquipment}>
     function create_default_slot$2(ctx) {
     	let item;
     	let updating_item;
@@ -2257,13 +2253,13 @@
     	let current;
 
     	function item_item_binding(value) {
-    		/*item_item_binding*/ ctx[5](value, /*item*/ ctx[6], /*each_value*/ ctx[7], /*item_index*/ ctx[8]);
+    		/*item_item_binding*/ ctx[7](value, /*item*/ ctx[8], /*each_value*/ ctx[9], /*item_index*/ ctx[10]);
     	}
 
-    	let item_props = { update: /*update*/ ctx[1] };
+    	let item_props = {};
 
-    	if (/*item*/ ctx[6] !== void 0) {
-    		item_props.item = /*item*/ ctx[6];
+    	if (/*item*/ ctx[8] !== void 0) {
+    		item_props.item = /*item*/ ctx[8];
     	}
 
     	item = new Item({ props: item_props });
@@ -2282,11 +2278,10 @@
     		p(new_ctx, dirty) {
     			ctx = new_ctx;
     			const item_changes = {};
-    			if (dirty & /*update*/ 2) item_changes.update = /*update*/ ctx[1];
 
     			if (!updating_item && dirty & /*model*/ 1) {
     				updating_item = true;
-    				item_changes.item = /*item*/ ctx[6];
+    				item_changes.item = /*item*/ ctx[8];
     				add_flush_callback(() => updating_item = false);
     			}
 
@@ -2308,16 +2303,16 @@
     	};
     }
 
-    // (31:0) {#each model.equipment as item}
+    // (32:0) {#each model.equipment as item}
     function create_each_block$2(ctx) {
     	let listitem;
     	let current;
 
     	listitem = new ListItem({
     			props: {
-    				item: /*item*/ ctx[6],
-    				move: /*moveEquipment*/ ctx[3],
-    				remove: /*removeEquipment*/ ctx[4],
+    				item: /*item*/ ctx[8],
+    				move: /*moveEquipment*/ ctx[5],
+    				remove: /*removeEquipment*/ ctx[6],
     				$$slots: { default: [create_default_slot$2] },
     				$$scope: { ctx }
     			}
@@ -2333,9 +2328,9 @@
     		},
     		p(ctx, dirty) {
     			const listitem_changes = {};
-    			if (dirty & /*model*/ 1) listitem_changes.item = /*item*/ ctx[6];
+    			if (dirty & /*model*/ 1) listitem_changes.item = /*item*/ ctx[8];
 
-    			if (dirty & /*$$scope, update, model*/ 515) {
+    			if (dirty & /*$$scope, model*/ 2049) {
     				listitem_changes.$$scope = { dirty, ctx };
     			}
 
@@ -2358,10 +2353,14 @@
 
     function create_fragment$8(ctx) {
     	let div;
-    	let span;
-    	let t1;
     	let button;
+    	let t1;
+    	let span;
+    	let t2;
     	let t3;
+    	let t4;
+    	let span_class_value;
+    	let t5;
     	let each_1_anchor;
     	let current;
     	let mounted;
@@ -2380,27 +2379,33 @@
     	return {
     		c() {
     			div = element("div");
-    			span = element("span");
-    			span.textContent = "Equipment";
-    			t1 = space();
     			button = element("button");
     			button.textContent = "Add";
-    			t3 = space();
+    			t1 = space();
+    			span = element("span");
+    			t2 = text(/*used*/ ctx[2]);
+    			t3 = text("/");
+    			t4 = text(/*capacity*/ ctx[1]);
+    			t5 = space();
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
     			}
 
     			each_1_anchor = empty();
-    			attr(button, "class", "ml-auto btn btn-dark");
-    			attr(div, "class", "d-flex align-items-end");
+    			attr(button, "class", "btn btn-dark");
+    			attr(span, "class", span_class_value = "ml-auto btn " + /*btnStyle*/ ctx[3]);
+    			attr(div, "class", "d-flex align-items-end m-1");
     		},
     		m(target, anchor) {
     			insert(target, div, anchor);
-    			append(div, span);
-    			append(div, t1);
     			append(div, button);
-    			insert(target, t3, anchor);
+    			append(div, t1);
+    			append(div, span);
+    			append(span, t2);
+    			append(span, t3);
+    			append(span, t4);
+    			insert(target, t5, anchor);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				if (each_blocks[i]) {
@@ -2412,12 +2417,19 @@
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen(button, "click", /*addEquipment*/ ctx[2]);
+    				dispose = listen(button, "click", /*addEquipment*/ ctx[4]);
     				mounted = true;
     			}
     		},
     		p(ctx, [dirty]) {
-    			if (dirty & /*model, moveEquipment, removeEquipment, update*/ 27) {
+    			if (!current || dirty & /*used*/ 4) set_data(t2, /*used*/ ctx[2]);
+    			if (!current || dirty & /*capacity*/ 2) set_data(t4, /*capacity*/ ctx[1]);
+
+    			if (!current || dirty & /*btnStyle*/ 8 && span_class_value !== (span_class_value = "ml-auto btn " + /*btnStyle*/ ctx[3])) {
+    				attr(span, "class", span_class_value);
+    			}
+
+    			if (dirty & /*model, moveEquipment, removeEquipment*/ 97) {
     				each_value = /*model*/ ctx[0].equipment;
     				let i;
 
@@ -2464,7 +2476,7 @@
     		},
     		d(detaching) {
     			if (detaching) detach(div);
-    			if (detaching) detach(t3);
+    			if (detaching) detach(t5);
     			destroy_each(each_blocks, detaching);
     			if (detaching) detach(each_1_anchor);
     			mounted = false;
@@ -2474,13 +2486,14 @@
     }
 
     function instance$8($$self, $$props, $$invalidate) {
+    	let capacity;
+    	let used;
+    	let btnStyle;
     	let { model } = $$props;
-    	let { update } = $$props;
 
     	function addEquipment() {
     		model.equipment.push({ name: '', size: 1 });
     		$$invalidate(0, model);
-    		update();
     	}
 
     	function moveEquipment(n, item) {
@@ -2491,7 +2504,6 @@
     	function removeEquipment(item) {
     		listActions.remove(model.equipment, item);
     		$$invalidate(0, model);
-    		update();
     	}
 
     	function item_item_binding(value, item, each_value, item_index) {
@@ -2501,16 +2513,38 @@
 
     	$$self.$$set = $$props => {
     		if ('model' in $$props) $$invalidate(0, model = $$props.model);
-    		if ('update' in $$props) $$invalidate(1, update = $$props.update);
     	};
 
-    	return [model, update, addEquipment, moveEquipment, removeEquipment, item_item_binding];
+    	$$self.$$.update = () => {
+    		if ($$self.$$.dirty & /*model*/ 1) {
+    			$$invalidate(1, capacity = 10 + model.abilities.constitution);
+    		}
+
+    		if ($$self.$$.dirty & /*model*/ 1) {
+    			$$invalidate(2, used = model.equipment.reduce((a, b) => a + b.size, 0));
+    		}
+
+    		if ($$self.$$.dirty & /*used, capacity*/ 6) {
+    			$$invalidate(3, btnStyle = used > capacity ? 'btn-danger' : 'btn-dark');
+    		}
+    	};
+
+    	return [
+    		model,
+    		capacity,
+    		used,
+    		btnStyle,
+    		addEquipment,
+    		moveEquipment,
+    		removeEquipment,
+    		item_item_binding
+    	];
     }
 
     class Equipment extends SvelteComponent {
     	constructor(options) {
     		super();
-    		init(this, options, instance$8, create_fragment$8, safe_not_equal, { model: 0, update: 1 });
+    		init(this, options, instance$8, create_fragment$8, safe_not_equal, { model: 0 });
     	}
     }
 
@@ -3975,8 +4009,8 @@
 
     	function handleClick(e) {
     		$$invalidate(2, score += e.shiftKey ? -1 : 1);
-    		if (score < 0) $$invalidate(2, score = 0);
-    		if (score > 10) $$invalidate(2, score = 10);
+    		if (score < 0) $$invalidate(2, score = 10);
+    		if (score > 10) $$invalidate(2, score = 0);
     	}
 
     	$$self.$$set = $$props => {
@@ -4563,8 +4597,8 @@
     		$$invalidate(0, hp.max += e.shiftKey ? -1 : 1, hp);
     	}
 
-    	const click_handler = () => handleCurrent({ shiftKey: true });
-    	const click_handler_1 = () => handleCurrent({ shiftKey: false });
+    	const click_handler = () => handleCurrent({ shiftKey: false });
+    	const click_handler_1 = () => handleCurrent({ shiftKey: true });
     	const click_handler_2 = () => handleMax({ shiftKey: false });
     	const click_handler_3 = () => handleMax({ shiftKey: true });
 
