@@ -1,6 +1,7 @@
 <script>    
     export let item;
     export let isEditing;
+    export let btnStyle = 'btn-light';
 </script>
 
 {#if isEditing}
@@ -10,6 +11,6 @@
     </div>
     <button on:click={() => { isEditing = false; }} class="btn btn-light border-dark ml-1">Close</button>
 {:else}
-    <button on:click={() => isEditing = true} class="btn btn-light border text-left flex-grow-1">{item.name}</button>
-    <button on:click={() => isEditing = true} class="btn btn-dark border ml-1">{item.size}</button>
+    <button on:click={() => isEditing = true} title="name" class="btn {btnStyle} border text-left flex-grow-1">{item.name}</button>
+    <button on:click={() => isEditing = true} title="size" class="btn btn-dark border ml-1">{item.size}</button>
 {/if}

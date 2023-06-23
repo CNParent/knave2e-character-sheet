@@ -15,6 +15,7 @@ const character = () => ({
         charisma: 0
     },
     equipment: [],
+    wounds: [],
     info: '',
     notes: []
 });

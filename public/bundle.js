@@ -559,6 +559,7 @@
             charisma: 0
         },
         equipment: [],
+        wounds: [],
         info: '',
         notes: []
     });
@@ -1437,7 +1438,7 @@
     }
 
     // (11:0) <TextInput bind:content={model.level}>
-    function create_default_slot_1$2(ctx) {
+    function create_default_slot_1$3(ctx) {
     	let t;
 
     	return {
@@ -1523,7 +1524,7 @@
     	}
 
     	let textinput2_props = {
-    		$$slots: { default: [create_default_slot_1$2] },
+    		$$slots: { default: [create_default_slot_1$3] },
     		$$scope: { ctx }
     	};
 
@@ -1876,6 +1877,7 @@
     	let button0;
     	let t0_value = /*item*/ ctx[0].name + "";
     	let t0;
+    	let button0_class_value;
     	let t1;
     	let button1;
     	let t2_value = /*item*/ ctx[0].size + "";
@@ -1890,7 +1892,9 @@
     			t1 = space();
     			button1 = element("button");
     			t2 = text(t2_value);
-    			attr(button0, "class", "btn btn-light border text-left flex-grow-1");
+    			attr(button0, "title", "name");
+    			attr(button0, "class", button0_class_value = "btn " + /*btnStyle*/ ctx[2] + " border text-left flex-grow-1");
+    			attr(button1, "title", "size");
     			attr(button1, "class", "btn btn-dark border ml-1");
     		},
     		m(target, anchor) {
@@ -1902,8 +1906,8 @@
 
     			if (!mounted) {
     				dispose = [
-    					listen(button0, "click", /*click_handler_1*/ ctx[5]),
-    					listen(button1, "click", /*click_handler_2*/ ctx[6])
+    					listen(button0, "click", /*click_handler_1*/ ctx[6]),
+    					listen(button1, "click", /*click_handler_2*/ ctx[7])
     				];
 
     				mounted = true;
@@ -1911,6 +1915,11 @@
     		},
     		p(ctx, dirty) {
     			if (dirty & /*item*/ 1 && t0_value !== (t0_value = /*item*/ ctx[0].name + "")) set_data(t0, t0_value);
+
+    			if (dirty & /*btnStyle*/ 4 && button0_class_value !== (button0_class_value = "btn " + /*btnStyle*/ ctx[2] + " border text-left flex-grow-1")) {
+    				attr(button0, "class", button0_class_value);
+    			}
+
     			if (dirty & /*item*/ 1 && t2_value !== (t2_value = /*item*/ ctx[0].size + "")) set_data(t2, t2_value);
     		},
     		d(detaching) {
@@ -1923,7 +1932,7 @@
     	};
     }
 
-    // (6:0) {#if isEditing}
+    // (7:0) {#if isEditing}
     function create_if_block$3(ctx) {
     	let input0;
     	let t0;
@@ -1961,9 +1970,9 @@
 
     			if (!mounted) {
     				dispose = [
-    					listen(input0, "input", /*input0_input_handler*/ ctx[2]),
-    					listen(input1, "input", /*input1_input_handler*/ ctx[3]),
-    					listen(button, "click", /*click_handler*/ ctx[4])
+    					listen(input0, "input", /*input0_input_handler*/ ctx[3]),
+    					listen(input1, "input", /*input1_input_handler*/ ctx[4]),
+    					listen(button, "click", /*click_handler*/ ctx[5])
     				];
 
     				mounted = true;
@@ -2035,6 +2044,7 @@
     function instance$a($$self, $$props, $$invalidate) {
     	let { item } = $$props;
     	let { isEditing } = $$props;
+    	let { btnStyle = 'btn-light' } = $$props;
 
     	function input0_input_handler() {
     		item.name = this.value;
@@ -2056,11 +2066,13 @@
     	$$self.$$set = $$props => {
     		if ('item' in $$props) $$invalidate(0, item = $$props.item);
     		if ('isEditing' in $$props) $$invalidate(1, isEditing = $$props.isEditing);
+    		if ('btnStyle' in $$props) $$invalidate(2, btnStyle = $$props.btnStyle);
     	};
 
     	return [
     		item,
     		isEditing,
+    		btnStyle,
     		input0_input_handler,
     		input1_input_handler,
     		click_handler,
@@ -2072,7 +2084,7 @@
     class Item extends SvelteComponent {
     	constructor(options) {
     		super();
-    		init(this, options, instance$a, create_fragment$a, safe_not_equal, { item: 0, isEditing: 1 });
+    		init(this, options, instance$a, create_fragment$a, safe_not_equal, { item: 0, isEditing: 1, btnStyle: 2 });
     	}
     }
 
@@ -2239,31 +2251,141 @@
 
     function get_each_context$2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[8] = list[i];
-    	child_ctx[9] = list;
-    	child_ctx[10] = i;
+    	child_ctx[12] = list[i];
+    	child_ctx[13] = list;
+    	child_ctx[14] = i;
     	return child_ctx;
     }
 
-    // (33:4) <ListItem item={item} move={moveEquipment} remove={removeEquipment}>
+    function get_each_context_1(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[15] = list[i];
+    	child_ctx[16] = list;
+    	child_ctx[17] = i;
+    	return child_ctx;
+    }
+
+    // (50:4) <ListItem item={item} move={moveEquipment} remove={removeEquipment}>
+    function create_default_slot_1$2(ctx) {
+    	let item;
+    	let updating_item;
+    	let current;
+
+    	function item_item_binding(value) {
+    		/*item_item_binding*/ ctx[10](value, /*item*/ ctx[15], /*each_value_1*/ ctx[16], /*item_index*/ ctx[17]);
+    	}
+
+    	let item_props = {};
+
+    	if (/*item*/ ctx[15] !== void 0) {
+    		item_props.item = /*item*/ ctx[15];
+    	}
+
+    	item = new Item({ props: item_props });
+    	binding_callbacks.push(() => bind(item, 'item', item_item_binding));
+
+    	return {
+    		c() {
+    			create_component(item.$$.fragment);
+    		},
+    		m(target, anchor) {
+    			mount_component(item, target, anchor);
+    			current = true;
+    		},
+    		p(new_ctx, dirty) {
+    			ctx = new_ctx;
+    			const item_changes = {};
+
+    			if (!updating_item && dirty & /*model*/ 1) {
+    				updating_item = true;
+    				item_changes.item = /*item*/ ctx[15];
+    				add_flush_callback(() => updating_item = false);
+    			}
+
+    			item.$set(item_changes);
+    		},
+    		i(local) {
+    			if (current) return;
+    			transition_in(item.$$.fragment, local);
+    			current = true;
+    		},
+    		o(local) {
+    			transition_out(item.$$.fragment, local);
+    			current = false;
+    		},
+    		d(detaching) {
+    			destroy_component(item, detaching);
+    		}
+    	};
+    }
+
+    // (49:0) {#each model.equipment as item}
+    function create_each_block_1(ctx) {
+    	let listitem;
+    	let current;
+
+    	listitem = new ListItem({
+    			props: {
+    				item: /*item*/ ctx[15],
+    				move: /*moveEquipment*/ ctx[5],
+    				remove: /*removeEquipment*/ ctx[6],
+    				$$slots: { default: [create_default_slot_1$2] },
+    				$$scope: { ctx }
+    			}
+    		});
+
+    	return {
+    		c() {
+    			create_component(listitem.$$.fragment);
+    		},
+    		m(target, anchor) {
+    			mount_component(listitem, target, anchor);
+    			current = true;
+    		},
+    		p(ctx, dirty) {
+    			const listitem_changes = {};
+    			if (dirty & /*model*/ 1) listitem_changes.item = /*item*/ ctx[15];
+
+    			if (dirty & /*$$scope, model*/ 262145) {
+    				listitem_changes.$$scope = { dirty, ctx };
+    			}
+
+    			listitem.$set(listitem_changes);
+    		},
+    		i(local) {
+    			if (current) return;
+    			transition_in(listitem.$$.fragment, local);
+    			current = true;
+    		},
+    		o(local) {
+    			transition_out(listitem.$$.fragment, local);
+    			current = false;
+    		},
+    		d(detaching) {
+    			destroy_component(listitem, detaching);
+    		}
+    	};
+    }
+
+    // (60:4) <ListItem item={wound} move={moveWound} remove={removeWound}>
     function create_default_slot$2(ctx) {
     	let item;
     	let updating_item;
     	let t;
     	let current;
 
-    	function item_item_binding(value) {
-    		/*item_item_binding*/ ctx[7](value, /*item*/ ctx[8], /*each_value*/ ctx[9], /*item_index*/ ctx[10]);
+    	function item_item_binding_1(value) {
+    		/*item_item_binding_1*/ ctx[11](value, /*wound*/ ctx[12], /*each_value*/ ctx[13], /*wound_index*/ ctx[14]);
     	}
 
-    	let item_props = {};
+    	let item_props = { btnStyle: "btn-danger" };
 
-    	if (/*item*/ ctx[8] !== void 0) {
-    		item_props.item = /*item*/ ctx[8];
+    	if (/*wound*/ ctx[12] !== void 0) {
+    		item_props.item = /*wound*/ ctx[12];
     	}
 
     	item = new Item({ props: item_props });
-    	binding_callbacks.push(() => bind(item, 'item', item_item_binding));
+    	binding_callbacks.push(() => bind(item, 'item', item_item_binding_1));
 
     	return {
     		c() {
@@ -2281,7 +2403,7 @@
 
     			if (!updating_item && dirty & /*model*/ 1) {
     				updating_item = true;
-    				item_changes.item = /*item*/ ctx[8];
+    				item_changes.item = /*wound*/ ctx[12];
     				add_flush_callback(() => updating_item = false);
     			}
 
@@ -2303,16 +2425,16 @@
     	};
     }
 
-    // (32:0) {#each model.equipment as item}
+    // (59:0) {#each model.wounds as wound}
     function create_each_block$2(ctx) {
     	let listitem;
     	let current;
 
     	listitem = new ListItem({
     			props: {
-    				item: /*item*/ ctx[8],
-    				move: /*moveEquipment*/ ctx[5],
-    				remove: /*removeEquipment*/ ctx[6],
+    				item: /*wound*/ ctx[12],
+    				move: /*moveWound*/ ctx[8],
+    				remove: /*removeWound*/ ctx[9],
     				$$slots: { default: [create_default_slot$2] },
     				$$scope: { ctx }
     			}
@@ -2328,9 +2450,9 @@
     		},
     		p(ctx, dirty) {
     			const listitem_changes = {};
-    			if (dirty & /*model*/ 1) listitem_changes.item = /*item*/ ctx[8];
+    			if (dirty & /*model*/ 1) listitem_changes.item = /*wound*/ ctx[12];
 
-    			if (dirty & /*$$scope, model*/ 2049) {
+    			if (dirty & /*$$scope, model*/ 262145) {
     				listitem_changes.$$scope = { dirty, ctx };
     			}
 
@@ -2352,60 +2474,123 @@
     }
 
     function create_fragment$8(ctx) {
-    	let div;
-    	let button;
+    	let div0;
+    	let span0;
+    	let t0;
     	let t1;
-    	let span;
     	let t2;
+    	let span0_class_value;
     	let t3;
-    	let t4;
-    	let span_class_value;
+    	let div1;
+    	let span1;
     	let t5;
-    	let each_1_anchor;
+    	let button0;
+    	let t7;
+    	let t8;
+    	let hr;
+    	let t9;
+    	let div2;
+    	let span2;
+    	let t11;
+    	let button1;
+    	let t13;
+    	let each1_anchor;
     	let current;
     	let mounted;
     	let dispose;
-    	let each_value = /*model*/ ctx[0].equipment;
+    	let each_value_1 = /*model*/ ctx[0].equipment;
+    	let each_blocks_1 = [];
+
+    	for (let i = 0; i < each_value_1.length; i += 1) {
+    		each_blocks_1[i] = create_each_block_1(get_each_context_1(ctx, each_value_1, i));
+    	}
+
+    	const out = i => transition_out(each_blocks_1[i], 1, 1, () => {
+    		each_blocks_1[i] = null;
+    	});
+
+    	let each_value = /*model*/ ctx[0].wounds;
     	let each_blocks = [];
 
     	for (let i = 0; i < each_value.length; i += 1) {
     		each_blocks[i] = create_each_block$2(get_each_context$2(ctx, each_value, i));
     	}
 
-    	const out = i => transition_out(each_blocks[i], 1, 1, () => {
+    	const out_1 = i => transition_out(each_blocks[i], 1, 1, () => {
     		each_blocks[i] = null;
     	});
 
     	return {
     		c() {
-    			div = element("div");
-    			button = element("button");
-    			button.textContent = "Add";
-    			t1 = space();
-    			span = element("span");
-    			t2 = text(/*used*/ ctx[2]);
-    			t3 = text("/");
-    			t4 = text(/*capacity*/ ctx[1]);
+    			div0 = element("div");
+    			span0 = element("span");
+    			t0 = text(/*used*/ ctx[2]);
+    			t1 = text("/");
+    			t2 = text(/*capacity*/ ctx[1]);
+    			t3 = space();
+    			div1 = element("div");
+    			span1 = element("span");
+    			span1.textContent = "Equipment";
     			t5 = space();
+    			button0 = element("button");
+    			button0.textContent = "Add";
+    			t7 = space();
+
+    			for (let i = 0; i < each_blocks_1.length; i += 1) {
+    				each_blocks_1[i].c();
+    			}
+
+    			t8 = space();
+    			hr = element("hr");
+    			t9 = space();
+    			div2 = element("div");
+    			span2 = element("span");
+    			span2.textContent = "Wounds";
+    			t11 = space();
+    			button1 = element("button");
+    			button1.textContent = "Add";
+    			t13 = space();
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
     			}
 
-    			each_1_anchor = empty();
-    			attr(button, "class", "btn btn-dark");
-    			attr(span, "class", span_class_value = "ml-auto btn " + /*btnStyle*/ ctx[3]);
-    			attr(div, "class", "d-flex align-items-end m-1");
+    			each1_anchor = empty();
+    			attr(span0, "title", "capacity");
+    			attr(span0, "class", span0_class_value = "btn " + /*btnStyle*/ ctx[3]);
+    			attr(div0, "class", "d-flex align-items-end m-1");
+    			attr(button0, "class", "ml-auto btn btn-dark");
+    			attr(div1, "class", "d-flex align-items-end m-1");
+    			attr(button1, "class", "ml-auto btn btn-dark");
+    			attr(div2, "class", "d-flex align-items-end m-1");
     		},
     		m(target, anchor) {
-    			insert(target, div, anchor);
-    			append(div, button);
-    			append(div, t1);
-    			append(div, span);
-    			append(span, t2);
-    			append(span, t3);
-    			append(span, t4);
-    			insert(target, t5, anchor);
+    			insert(target, div0, anchor);
+    			append(div0, span0);
+    			append(span0, t0);
+    			append(span0, t1);
+    			append(span0, t2);
+    			insert(target, t3, anchor);
+    			insert(target, div1, anchor);
+    			append(div1, span1);
+    			append(div1, t5);
+    			append(div1, button0);
+    			insert(target, t7, anchor);
+
+    			for (let i = 0; i < each_blocks_1.length; i += 1) {
+    				if (each_blocks_1[i]) {
+    					each_blocks_1[i].m(target, anchor);
+    				}
+    			}
+
+    			insert(target, t8, anchor);
+    			insert(target, hr, anchor);
+    			insert(target, t9, anchor);
+    			insert(target, div2, anchor);
+    			append(div2, span2);
+    			append(div2, t11);
+    			append(div2, button1);
+    			insert(target, t13, anchor);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				if (each_blocks[i]) {
@@ -2413,24 +2598,55 @@
     				}
     			}
 
-    			insert(target, each_1_anchor, anchor);
+    			insert(target, each1_anchor, anchor);
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen(button, "click", /*addEquipment*/ ctx[4]);
+    				dispose = [
+    					listen(button0, "click", /*addEquipment*/ ctx[4]),
+    					listen(button1, "click", /*addWound*/ ctx[7])
+    				];
+
     				mounted = true;
     			}
     		},
     		p(ctx, [dirty]) {
-    			if (!current || dirty & /*used*/ 4) set_data(t2, /*used*/ ctx[2]);
-    			if (!current || dirty & /*capacity*/ 2) set_data(t4, /*capacity*/ ctx[1]);
+    			if (!current || dirty & /*used*/ 4) set_data(t0, /*used*/ ctx[2]);
+    			if (!current || dirty & /*capacity*/ 2) set_data(t2, /*capacity*/ ctx[1]);
 
-    			if (!current || dirty & /*btnStyle*/ 8 && span_class_value !== (span_class_value = "ml-auto btn " + /*btnStyle*/ ctx[3])) {
-    				attr(span, "class", span_class_value);
+    			if (!current || dirty & /*btnStyle*/ 8 && span0_class_value !== (span0_class_value = "btn " + /*btnStyle*/ ctx[3])) {
+    				attr(span0, "class", span0_class_value);
     			}
 
     			if (dirty & /*model, moveEquipment, removeEquipment*/ 97) {
-    				each_value = /*model*/ ctx[0].equipment;
+    				each_value_1 = /*model*/ ctx[0].equipment;
+    				let i;
+
+    				for (i = 0; i < each_value_1.length; i += 1) {
+    					const child_ctx = get_each_context_1(ctx, each_value_1, i);
+
+    					if (each_blocks_1[i]) {
+    						each_blocks_1[i].p(child_ctx, dirty);
+    						transition_in(each_blocks_1[i], 1);
+    					} else {
+    						each_blocks_1[i] = create_each_block_1(child_ctx);
+    						each_blocks_1[i].c();
+    						transition_in(each_blocks_1[i], 1);
+    						each_blocks_1[i].m(t8.parentNode, t8);
+    					}
+    				}
+
+    				group_outros();
+
+    				for (i = each_value_1.length; i < each_blocks_1.length; i += 1) {
+    					out(i);
+    				}
+
+    				check_outros();
+    			}
+
+    			if (dirty & /*model, moveWound, removeWound*/ 769) {
+    				each_value = /*model*/ ctx[0].wounds;
     				let i;
 
     				for (i = 0; i < each_value.length; i += 1) {
@@ -2443,14 +2659,14 @@
     						each_blocks[i] = create_each_block$2(child_ctx);
     						each_blocks[i].c();
     						transition_in(each_blocks[i], 1);
-    						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
+    						each_blocks[i].m(each1_anchor.parentNode, each1_anchor);
     					}
     				}
 
     				group_outros();
 
     				for (i = each_value.length; i < each_blocks.length; i += 1) {
-    					out(i);
+    					out_1(i);
     				}
 
     				check_outros();
@@ -2459,6 +2675,10 @@
     		i(local) {
     			if (current) return;
 
+    			for (let i = 0; i < each_value_1.length; i += 1) {
+    				transition_in(each_blocks_1[i]);
+    			}
+
     			for (let i = 0; i < each_value.length; i += 1) {
     				transition_in(each_blocks[i]);
     			}
@@ -2466,6 +2686,12 @@
     			current = true;
     		},
     		o(local) {
+    			each_blocks_1 = each_blocks_1.filter(Boolean);
+
+    			for (let i = 0; i < each_blocks_1.length; i += 1) {
+    				transition_out(each_blocks_1[i]);
+    			}
+
     			each_blocks = each_blocks.filter(Boolean);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
@@ -2475,12 +2701,20 @@
     			current = false;
     		},
     		d(detaching) {
-    			if (detaching) detach(div);
-    			if (detaching) detach(t5);
+    			if (detaching) detach(div0);
+    			if (detaching) detach(t3);
+    			if (detaching) detach(div1);
+    			if (detaching) detach(t7);
+    			destroy_each(each_blocks_1, detaching);
+    			if (detaching) detach(t8);
+    			if (detaching) detach(hr);
+    			if (detaching) detach(t9);
+    			if (detaching) detach(div2);
+    			if (detaching) detach(t13);
     			destroy_each(each_blocks, detaching);
-    			if (detaching) detach(each_1_anchor);
+    			if (detaching) detach(each1_anchor);
     			mounted = false;
-    			dispose();
+    			run_all(dispose);
     		}
     	};
     }
@@ -2506,8 +2740,28 @@
     		$$invalidate(0, model);
     	}
 
-    	function item_item_binding(value, item, each_value, item_index) {
-    		each_value[item_index] = value;
+    	function addWound() {
+    		model.wounds.push({ name: '', size: 1 });
+    		$$invalidate(0, model);
+    	}
+
+    	function moveWound(n, item) {
+    		listActions.move(model.wounds, n, item);
+    		$$invalidate(0, model);
+    	}
+
+    	function removeWound(item) {
+    		listActions.remove(model.wounds, item);
+    		$$invalidate(0, model);
+    	}
+
+    	function item_item_binding(value, item, each_value_1, item_index) {
+    		each_value_1[item_index] = value;
+    		$$invalidate(0, model);
+    	}
+
+    	function item_item_binding_1(value, wound, each_value, wound_index) {
+    		each_value[wound_index] = value;
     		$$invalidate(0, model);
     	}
 
@@ -2521,7 +2775,7 @@
     		}
 
     		if ($$self.$$.dirty & /*model*/ 1) {
-    			$$invalidate(2, used = model.equipment.reduce((a, b) => a + b.size, 0));
+    			$$invalidate(2, used = model.equipment.reduce((a, b) => a + b.size, 0) + model.wounds.reduce((a, b) => a + b.size, 0));
     		}
 
     		if ($$self.$$.dirty & /*used, capacity*/ 6) {
@@ -2537,7 +2791,11 @@
     		addEquipment,
     		moveEquipment,
     		removeEquipment,
-    		item_item_binding
+    		addWound,
+    		moveWound,
+    		removeWound,
+    		item_item_binding,
+    		item_item_binding_1
     	];
     }
 
