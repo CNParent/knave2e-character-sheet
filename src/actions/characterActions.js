@@ -13,13 +13,14 @@ export default {
     delete: (model) => {
         if(!confirm(`Delete ${model.name}?`)) return;
 
-        localStorage.removeItem(model.name);
+        localStorage.removeItem(`${model.name}.knave2e`);
         return { success: `${model.name} deleted from character storage` };
     },
     deleteAll: () => {
         if(!confirm('Delete all saved characters?')) return;
-
-        localStorage.clear();
+        let characters = [...new Array(window.localStorage.length)].map((x,i) => window.localStorage.key(i));
+        characters = characters.filter(c => c.endsWith('.knave2e'));
+        characters.forEach(c => localStorage.removeItem(c));
         return { success: 'All characters deleted from character storage' };
     },
     export: (model) => {
