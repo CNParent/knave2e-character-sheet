@@ -2251,34 +2251,34 @@
 
     function get_each_context$2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[12] = list[i];
-    	child_ctx[13] = list;
-    	child_ctx[14] = i;
-    	return child_ctx;
-    }
-
-    function get_each_context_1(ctx, list, i) {
-    	const child_ctx = ctx.slice();
     	child_ctx[15] = list[i];
     	child_ctx[16] = list;
     	child_ctx[17] = i;
     	return child_ctx;
     }
 
-    // (50:4) <ListItem item={item} move={moveEquipment} remove={removeEquipment}>
+    function get_each_context_1(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[18] = list[i];
+    	child_ctx[19] = list;
+    	child_ctx[20] = i;
+    	return child_ctx;
+    }
+
+    // (58:4) <ListItem item={item} move={moveEquipment} remove={removeEquipment}>
     function create_default_slot_1$2(ctx) {
     	let item;
     	let updating_item;
     	let current;
 
     	function item_item_binding(value) {
-    		/*item_item_binding*/ ctx[10](value, /*item*/ ctx[15], /*each_value_1*/ ctx[16], /*item_index*/ ctx[17]);
+    		/*item_item_binding*/ ctx[13](value, /*item*/ ctx[18], /*each_value_1*/ ctx[19], /*item_index*/ ctx[20]);
     	}
 
     	let item_props = {};
 
-    	if (/*item*/ ctx[15] !== void 0) {
-    		item_props.item = /*item*/ ctx[15];
+    	if (/*item*/ ctx[18] !== void 0) {
+    		item_props.item = /*item*/ ctx[18];
     	}
 
     	item = new Item({ props: item_props });
@@ -2298,7 +2298,7 @@
 
     			if (!updating_item && dirty & /*model*/ 1) {
     				updating_item = true;
-    				item_changes.item = /*item*/ ctx[15];
+    				item_changes.item = /*item*/ ctx[18];
     				add_flush_callback(() => updating_item = false);
     			}
 
@@ -2319,16 +2319,16 @@
     	};
     }
 
-    // (49:0) {#each model.equipment as item}
+    // (57:0) {#each model.equipment as item}
     function create_each_block_1(ctx) {
     	let listitem;
     	let current;
 
     	listitem = new ListItem({
     			props: {
-    				item: /*item*/ ctx[15],
-    				move: /*moveEquipment*/ ctx[5],
-    				remove: /*removeEquipment*/ ctx[6],
+    				item: /*item*/ ctx[18],
+    				move: /*moveEquipment*/ ctx[8],
+    				remove: /*removeEquipment*/ ctx[9],
     				$$slots: { default: [create_default_slot_1$2] },
     				$$scope: { ctx }
     			}
@@ -2344,9 +2344,9 @@
     		},
     		p(ctx, dirty) {
     			const listitem_changes = {};
-    			if (dirty & /*model*/ 1) listitem_changes.item = /*item*/ ctx[15];
+    			if (dirty & /*model*/ 1) listitem_changes.item = /*item*/ ctx[18];
 
-    			if (dirty & /*$$scope, model*/ 262145) {
+    			if (dirty & /*$$scope, model*/ 2097153) {
     				listitem_changes.$$scope = { dirty, ctx };
     			}
 
@@ -2367,7 +2367,7 @@
     	};
     }
 
-    // (60:4) <ListItem item={wound} move={moveWound} remove={removeWound}>
+    // (69:4) <ListItem item={wound} move={moveWound} remove={removeWound}>
     function create_default_slot$2(ctx) {
     	let item;
     	let updating_item;
@@ -2375,13 +2375,13 @@
     	let current;
 
     	function item_item_binding_1(value) {
-    		/*item_item_binding_1*/ ctx[11](value, /*wound*/ ctx[12], /*each_value*/ ctx[13], /*wound_index*/ ctx[14]);
+    		/*item_item_binding_1*/ ctx[14](value, /*wound*/ ctx[15], /*each_value*/ ctx[16], /*wound_index*/ ctx[17]);
     	}
 
     	let item_props = { btnStyle: "btn-danger" };
 
-    	if (/*wound*/ ctx[12] !== void 0) {
-    		item_props.item = /*wound*/ ctx[12];
+    	if (/*wound*/ ctx[15] !== void 0) {
+    		item_props.item = /*wound*/ ctx[15];
     	}
 
     	item = new Item({ props: item_props });
@@ -2403,7 +2403,7 @@
 
     			if (!updating_item && dirty & /*model*/ 1) {
     				updating_item = true;
-    				item_changes.item = /*wound*/ ctx[12];
+    				item_changes.item = /*wound*/ ctx[15];
     				add_flush_callback(() => updating_item = false);
     			}
 
@@ -2425,16 +2425,16 @@
     	};
     }
 
-    // (59:0) {#each model.wounds as wound}
+    // (68:0) {#each model.wounds as wound}
     function create_each_block$2(ctx) {
     	let listitem;
     	let current;
 
     	listitem = new ListItem({
     			props: {
-    				item: /*wound*/ ctx[12],
-    				move: /*moveWound*/ ctx[8],
-    				remove: /*removeWound*/ ctx[9],
+    				item: /*wound*/ ctx[15],
+    				move: /*moveWound*/ ctx[11],
+    				remove: /*removeWound*/ ctx[12],
     				$$slots: { default: [create_default_slot$2] },
     				$$scope: { ctx }
     			}
@@ -2450,9 +2450,9 @@
     		},
     		p(ctx, dirty) {
     			const listitem_changes = {};
-    			if (dirty & /*model*/ 1) listitem_changes.item = /*wound*/ ctx[12];
+    			if (dirty & /*model*/ 1) listitem_changes.item = /*wound*/ ctx[15];
 
-    			if (dirty & /*$$scope, model*/ 262145) {
+    			if (dirty & /*$$scope, model*/ 2097153) {
     				listitem_changes.$$scope = { dirty, ctx };
     			}
 
@@ -2476,24 +2476,29 @@
     function create_fragment$8(ctx) {
     	let div0;
     	let span0;
-    	let t0;
     	let t1;
-    	let t2;
-    	let span0_class_value;
-    	let t3;
-    	let div1;
     	let span1;
+    	let t2;
+    	let t3;
+    	let t4;
+    	let span1_class_value;
     	let t5;
     	let button0;
     	let t7;
     	let t8;
     	let hr;
     	let t9;
-    	let div2;
+    	let div1;
     	let span2;
     	let t11;
-    	let button1;
+    	let span3;
+    	let t12;
     	let t13;
+    	let t14;
+    	let span3_class_value;
+    	let t15;
+    	let button1;
+    	let t17;
     	let each1_anchor;
     	let current;
     	let mounted;
@@ -2524,13 +2529,12 @@
     		c() {
     			div0 = element("div");
     			span0 = element("span");
-    			t0 = text(/*used*/ ctx[2]);
-    			t1 = text("/");
-    			t2 = text(/*capacity*/ ctx[1]);
-    			t3 = space();
-    			div1 = element("div");
+    			span0.textContent = "Equipment";
+    			t1 = space();
     			span1 = element("span");
-    			span1.textContent = "Equipment";
+    			t2 = text(/*totalItemSize*/ ctx[4]);
+    			t3 = text("/");
+    			t4 = text(/*maxItemSize*/ ctx[3]);
     			t5 = space();
     			button0 = element("button");
     			button0.textContent = "Add";
@@ -2543,38 +2547,43 @@
     			t8 = space();
     			hr = element("hr");
     			t9 = space();
-    			div2 = element("div");
+    			div1 = element("div");
     			span2 = element("span");
     			span2.textContent = "Wounds";
     			t11 = space();
+    			span3 = element("span");
+    			t12 = text(/*totalWoundSize*/ ctx[1]);
+    			t13 = text("/");
+    			t14 = text(/*maxWoundSize*/ ctx[2]);
+    			t15 = space();
     			button1 = element("button");
     			button1.textContent = "Add";
-    			t13 = space();
+    			t17 = space();
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
     			}
 
     			each1_anchor = empty();
-    			attr(span0, "title", "capacity");
-    			attr(span0, "class", span0_class_value = "btn " + /*btnStyle*/ ctx[3]);
+    			attr(span1, "title", "capacity");
+    			attr(span1, "class", span1_class_value = "ml-auto btn " + /*itemBtnStyle*/ ctx[6]);
+    			attr(button0, "class", "ml-1 btn btn-dark");
     			attr(div0, "class", "d-flex align-items-end m-1");
-    			attr(button0, "class", "ml-auto btn btn-dark");
+    			attr(span3, "title", "capacity");
+    			attr(span3, "class", span3_class_value = "ml-auto btn " + /*woundBtnStyle*/ ctx[5]);
+    			attr(button1, "class", "ml-1 btn btn-dark");
     			attr(div1, "class", "d-flex align-items-end m-1");
-    			attr(button1, "class", "ml-auto btn btn-dark");
-    			attr(div2, "class", "d-flex align-items-end m-1");
     		},
     		m(target, anchor) {
     			insert(target, div0, anchor);
     			append(div0, span0);
-    			append(span0, t0);
-    			append(span0, t1);
-    			append(span0, t2);
-    			insert(target, t3, anchor);
-    			insert(target, div1, anchor);
-    			append(div1, span1);
-    			append(div1, t5);
-    			append(div1, button0);
+    			append(div0, t1);
+    			append(div0, span1);
+    			append(span1, t2);
+    			append(span1, t3);
+    			append(span1, t4);
+    			append(div0, t5);
+    			append(div0, button0);
     			insert(target, t7, anchor);
 
     			for (let i = 0; i < each_blocks_1.length; i += 1) {
@@ -2586,11 +2595,16 @@
     			insert(target, t8, anchor);
     			insert(target, hr, anchor);
     			insert(target, t9, anchor);
-    			insert(target, div2, anchor);
-    			append(div2, span2);
-    			append(div2, t11);
-    			append(div2, button1);
-    			insert(target, t13, anchor);
+    			insert(target, div1, anchor);
+    			append(div1, span2);
+    			append(div1, t11);
+    			append(div1, span3);
+    			append(span3, t12);
+    			append(span3, t13);
+    			append(span3, t14);
+    			append(div1, t15);
+    			append(div1, button1);
+    			insert(target, t17, anchor);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				if (each_blocks[i]) {
@@ -2603,22 +2617,22 @@
 
     			if (!mounted) {
     				dispose = [
-    					listen(button0, "click", /*addEquipment*/ ctx[4]),
-    					listen(button1, "click", /*addWound*/ ctx[7])
+    					listen(button0, "click", /*addEquipment*/ ctx[7]),
+    					listen(button1, "click", /*addWound*/ ctx[10])
     				];
 
     				mounted = true;
     			}
     		},
     		p(ctx, [dirty]) {
-    			if (!current || dirty & /*used*/ 4) set_data(t0, /*used*/ ctx[2]);
-    			if (!current || dirty & /*capacity*/ 2) set_data(t2, /*capacity*/ ctx[1]);
+    			if (!current || dirty & /*totalItemSize*/ 16) set_data(t2, /*totalItemSize*/ ctx[4]);
+    			if (!current || dirty & /*maxItemSize*/ 8) set_data(t4, /*maxItemSize*/ ctx[3]);
 
-    			if (!current || dirty & /*btnStyle*/ 8 && span0_class_value !== (span0_class_value = "btn " + /*btnStyle*/ ctx[3])) {
-    				attr(span0, "class", span0_class_value);
+    			if (!current || dirty & /*itemBtnStyle*/ 64 && span1_class_value !== (span1_class_value = "ml-auto btn " + /*itemBtnStyle*/ ctx[6])) {
+    				attr(span1, "class", span1_class_value);
     			}
 
-    			if (dirty & /*model, moveEquipment, removeEquipment*/ 97) {
+    			if (dirty & /*model, moveEquipment, removeEquipment*/ 769) {
     				each_value_1 = /*model*/ ctx[0].equipment;
     				let i;
 
@@ -2645,7 +2659,14 @@
     				check_outros();
     			}
 
-    			if (dirty & /*model, moveWound, removeWound*/ 769) {
+    			if (!current || dirty & /*totalWoundSize*/ 2) set_data(t12, /*totalWoundSize*/ ctx[1]);
+    			if (!current || dirty & /*maxWoundSize*/ 4) set_data(t14, /*maxWoundSize*/ ctx[2]);
+
+    			if (!current || dirty & /*woundBtnStyle*/ 32 && span3_class_value !== (span3_class_value = "ml-auto btn " + /*woundBtnStyle*/ ctx[5])) {
+    				attr(span3, "class", span3_class_value);
+    			}
+
+    			if (dirty & /*model, moveWound, removeWound*/ 6145) {
     				each_value = /*model*/ ctx[0].wounds;
     				let i;
 
@@ -2702,15 +2723,13 @@
     		},
     		d(detaching) {
     			if (detaching) detach(div0);
-    			if (detaching) detach(t3);
-    			if (detaching) detach(div1);
     			if (detaching) detach(t7);
     			destroy_each(each_blocks_1, detaching);
     			if (detaching) detach(t8);
     			if (detaching) detach(hr);
     			if (detaching) detach(t9);
-    			if (detaching) detach(div2);
-    			if (detaching) detach(t13);
+    			if (detaching) detach(div1);
+    			if (detaching) detach(t17);
     			destroy_each(each_blocks, detaching);
     			if (detaching) detach(each1_anchor);
     			mounted = false;
@@ -2720,9 +2739,12 @@
     }
 
     function instance$8($$self, $$props, $$invalidate) {
-    	let capacity;
-    	let used;
-    	let btnStyle;
+    	let totalItemSize;
+    	let totalWoundSize;
+    	let maxWoundSize;
+    	let maxItemSize;
+    	let itemBtnStyle;
+    	let woundBtnStyle;
     	let { model } = $$props;
 
     	function addEquipment() {
@@ -2771,23 +2793,42 @@
 
     	$$self.$$.update = () => {
     		if ($$self.$$.dirty & /*model*/ 1) {
-    			$$invalidate(1, capacity = 10 + model.abilities.constitution);
+    			$$invalidate(4, totalItemSize = model.equipment.reduce((a, b) => a + b.size, 0));
     		}
 
     		if ($$self.$$.dirty & /*model*/ 1) {
-    			$$invalidate(2, used = model.equipment.reduce((a, b) => a + b.size, 0) + model.wounds.reduce((a, b) => a + b.size, 0));
+    			$$invalidate(1, totalWoundSize = model.wounds.reduce((a, b) => a + b.size, 0));
     		}
 
-    		if ($$self.$$.dirty & /*used, capacity*/ 6) {
-    			$$invalidate(3, btnStyle = used > capacity ? 'btn-danger' : 'btn-dark');
+    		if ($$self.$$.dirty & /*model*/ 1) {
+    			$$invalidate(2, maxWoundSize = 10 + model.abilities.constitution);
+    		}
+
+    		if ($$self.$$.dirty & /*model, totalWoundSize*/ 3) {
+    			$$invalidate(3, maxItemSize = 10 + model.abilities.constitution - totalWoundSize);
+    		}
+
+    		if ($$self.$$.dirty & /*totalItemSize, maxItemSize, totalWoundSize*/ 26) {
+    			$$invalidate(6, itemBtnStyle = totalItemSize > maxItemSize
+    			? 'btn-danger'
+    			: totalWoundSize > 0 ? 'btn-warning' : 'btn-dark');
+    		}
+
+    		if ($$self.$$.dirty & /*totalWoundSize, maxWoundSize*/ 6) {
+    			$$invalidate(5, woundBtnStyle = totalWoundSize >= maxWoundSize
+    			? 'btn-danger'
+    			: totalWoundSize > 0 ? 'btn-warning' : 'btn-dark');
     		}
     	};
 
     	return [
     		model,
-    		capacity,
-    		used,
-    		btnStyle,
+    		totalWoundSize,
+    		maxWoundSize,
+    		maxItemSize,
+    		totalItemSize,
+    		woundBtnStyle,
+    		itemBtnStyle,
     		addEquipment,
     		moveEquipment,
     		removeEquipment,
